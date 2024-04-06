@@ -1,0 +1,59 @@
+---
+title: "CV"
+author: "Tim Sippel"
+format: html
+editor: visual
+bibliography: bibliography/Publications_reports_presentations.bib
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| include: false
+# Install required packages
+# install.packages('tidyverse')
+# install.packages('googlesheets4')
+library('tidyverse')
+library('googlesheets4')
+library('sp')
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| include: false
+input_education<-read_sheet("https://docs.google.com/spreadsheets/d/19s1p6Xr73FTJmM69JTP5Jn807aG1K8VPsoimNpXw3xw/edit", sheet = "Education")
+
+input_employment<-read_sheet("https://docs.google.com/spreadsheets/d/19s1p6Xr73FTJmM69JTP5Jn807aG1K8VPsoimNpXw3xw/edit", sheet = "Employment")
+
+input_highlights<-read_sheet("https://docs.google.com/spreadsheets/d/19s1p6Xr73FTJmM69JTP5Jn807aG1K8VPsoimNpXw3xw/edit", sheet = "Highlights")
+
+input_projects<-read_sheet("https://docs.google.com/spreadsheets/d/19s1p6Xr73FTJmM69JTP5Jn807aG1K8VPsoimNpXw3xw/edit", sheet = "Projects")
+
+input_prof_service<-read_sheet("https://docs.google.com/spreadsheets/d/19s1p6Xr73FTJmM69JTP5Jn807aG1K8VPsoimNpXw3xw/edit", sheet = "Professional Service")
+
+input_prof_skills<-read_sheet("https://docs.google.com/spreadsheets/d/19s1p6Xr73FTJmM69JTP5Jn807aG1K8VPsoimNpXw3xw/edit", sheet = "Skills & Qualifications")
+```
+
+## Quarto
+
+This is a test [@francis-2023],[@carvalho-2016], @sippel-2024A
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
