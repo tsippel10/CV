@@ -66,5 +66,5 @@ bs<-input_education |> filter(Degree == "BS")
 # Publications
 
 ```{r}
-#| No cite
+#|
 ```
