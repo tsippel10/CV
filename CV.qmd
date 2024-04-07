@@ -1,7 +1,14 @@
 ---
 title: "Tim Sippel"
-#author: "Tim Sippel"
-format: pdf
+format: 
+  html:
+    documentclass: article
+    geometry:
+      - top=15mm
+      - left=15mm
+      - right=15mm
+      - bottom=15mm       
+      - heightrounded
   #style: styles/CV_Style.css
 editor: visual
 bibliography: bibliography/Publications_reports_presentations.bib
@@ -36,11 +43,28 @@ input_prof_service<-read_sheet("https://docs.google.com/spreadsheets/d/19s1p6Xr7
 input_prof_skills<-read_sheet("https://docs.google.com/spreadsheets/d/19s1p6Xr73FTJmM69JTP5Jn807aG1K8VPsoimNpXw3xw/edit", sheet = "Skills & Qualifications")
 ```
 
+# Education
+
 ```{r}
 #| echo: false
 #| warning: false
 #| include: false
 
+phd<-input_education |> filter(Degree == "PhD")
 
+msc<-input_education |> filter(Degree == "MS")
 
+bs<-input_education |> filter(Degree == "BS")
+```
+
+`{r} phd |> select(Degree)` - `{r} phd |> select(Major)`: `{r} phd |> select(Institution)`; `{r} phd |> select(Location)` (`{r} phd |> select(EndYear)`)
+
+`{r} msc |> select(Degree)` - `{r} msc |> select(Major)`: `{r} msc |> select(Institution)`; `{r} msc |> select(Location)` (`{r} msc |> select(EndYear)`)
+
+`{r} bs |> select(Degree)` - `{r} bs |> select(Major)`: `{r} bs |> select(Institution)`; `{r} bs |> select(Location)` (`{r} bs |> select(EndYear)`)
+
+# Publications
+
+```{r}
+#| No cite
 ```
