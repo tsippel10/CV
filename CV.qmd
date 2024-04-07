@@ -12,6 +12,7 @@ format:
   #style: styles/CV_Style.css
 editor: visual
 bibliography: bibliography/Publications_reports_presentations.bib
+biblio-style: styles/apaa-cv.csl
 ---
 
 ```{r}
@@ -57,14 +58,10 @@ msc<-input_education |> filter(Degree == "MS")
 bs<-input_education |> filter(Degree == "BS")
 ```
 
-`{r} phd |> select(Degree)` - `{r} phd |> select(Major)`: `{r} phd |> select(Institution)`; `{r} phd |> select(Location)` (`{r} phd |> select(EndYear)`)
+`{r} phd |> select(Degree)` - `{r} phd |> select(Major)`: `{r} phd |> select(Institution)`; `{r} phd |> select(Location)`(`{r} phd |> select(EndYear)`)
 
 `{r} msc |> select(Degree)` - `{r} msc |> select(Major)`: `{r} msc |> select(Institution)`; `{r} msc |> select(Location)` (`{r} msc |> select(EndYear)`)
 
 `{r} bs |> select(Degree)` - `{r} bs |> select(Major)`: `{r} bs |> select(Institution)`; `{r} bs |> select(Location)` (`{r} bs |> select(EndYear)`)
 
 # Publications
-
-```{r}
-#|
-```
