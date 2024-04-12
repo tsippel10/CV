@@ -3,12 +3,6 @@ title: "Tim Sippel"
 format: 
   html:
     documentclass: article
-    geometry:
-      - top=15mm
-      - left=15mm
-      - right=15mm
-      - bottom=15mm       
-      - heightrounded
   #style: styles/CV_Style.css
 editor: visual
 bibliography: bibliography/Publications_reports_presentations.bib
