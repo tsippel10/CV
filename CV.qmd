@@ -65,6 +65,17 @@ bs<-input_education |> filter(Degree == "BS")
 #| warning: false
 #| include: false
 worley<-input_employment |> filter(Employer == "Worley Consulting")
+wdfw<-input_employment |> filter(Employer == "Washington Department of Fish and Wildlife")
+oai<-input_employment |> filter(Employer == "Ocean Associates")
+u_hawaii<-input_employment |> filter(Employer == "University of Hawaii")
+u_auckland<-input_employment |> filter(Employer == "University of Auckland")
+bwmr<-input_employment |> filter(Employer == "Bluewater Marine Research")
+kelly_tarltons<-input_employment |> filter(Employer == "Kelly Tarlton's Aquarium")
+mbaq<-input_employment |> filter(Employer == "Monterey Bay Aquarium")
+mote<-input_employment |> filter(Employer == "Mote Marine Lab")
+ksu<-input_employment |> filter(Employer == "Kansas State University")
+neaq<-input_employment |> filter(Employer == "New England Aquarium")
+sea_world<-input_employment |> filter(Employer == "Sea World")
 ```
 
 `{r} worley |> select(Employer)` - `{r} worley |> select(PositionTitle)`
