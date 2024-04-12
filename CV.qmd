@@ -1,7 +1,7 @@
 ---
 title: "Tim Sippel"
 format: 
-  html:
+  pdf:
     documentclass: article
   #style: styles/CV_Style.css
 editor: visual
@@ -58,4 +58,13 @@ bs<-input_education |> filter(Degree == "BS")
 
 `{r} bs |> select(Degree)` - `{r} bs |> select(Major)`: `{r} bs |> select(Institution)`; `{r} bs |> select(Location)` (`{r} bs |> select(EndYear)`)
 
-# Publications
+# Employment
+
+```{r}
+#| echo: false
+#| warning: false
+#| include: false
+worley<-input_employment |> filter(Employer == "Worley Consulting")
+```
+
+`{r} worley |> select(Employer)` - `{r} worley |> select(PositionTitle)`
