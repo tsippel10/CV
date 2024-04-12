@@ -1,5 +1,5 @@
 ---
-title: "Tim Sippel."
+title: "Tim Sippel"
 format: 
   html:
     documentclass: article
