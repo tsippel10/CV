@@ -1,0 +1,56 @@
+---
+title: "CV"
+format:
+    html:
+        fontawesome: true
+---
+
+
+```{r}
+#| label: required-packages
+#| echo: false
+#| include: false
+library(tidyverse)
+library(janitor)
+library(googlesheets4)
+```
+
+```{r}
+#| label: read-cv-data
+#| echo: false
+#| include: false
+cv_data <- "https://docs.google.com/spreadsheets/d/12-v_2G9hekg9jv-Om4kFGLmT733Bnb6p_NSW0jl6nYY/edit?gid=1958414084#gid=1958414084"
+
+personal_info <- read_sheet(cv_data, sheet = "Personal_Info") 
+education <- read_sheet(cv_data, sheet = "Education") 
+employment <- read_sheet(cv_data, sheet = "Employment") 
+projects <- read_sheet(cv_data, sheet = "Projects") 
+skills <- read_sheet(cv_data, sheet = "Skills") 
+certifications <- read_sheet(cv_data, sheet = "Certifications") 
+professional_service <- read_sheet(cv_data, sheet = "Professional_Service") 
+references <- read_sheet(cv_data, sheet = "References") 
+```
+
+```{r}
+#| label: cv-header
+#| echo: false
+#| results: asis
+
+# Extract personal information
+name <- paste(personal_info$First_Name_Short, personal_info$Last_Name, "-", personal_info$Degree)
+email <- personal_info$Email
+phone <- personal_info$Cell_Phone
+website <- personal_info$Website
+linkedin <- personal_info$LinkedIn
+github <- personal_info$Github
+
+# Create header
+cat(name, "\n\n", sep = "")
+cat(email, " | ", phone, "\n\n", sep = "")
+
+# Add links with icons
+cat("[", website, "](https://", website, ")", " | ", 
+    "[{{< fa brands linkedin >}}](", linkedin, ")", " | ",
+    "[{{< fa brands github >}}](", github, ")",
+    "\n\n", sep = "")
+```
