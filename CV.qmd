@@ -1,10 +1,10 @@
 ---
-title: "CV"
+title: ""
 format:
-    html:
-        fontawesome: true
+  html:
+    css: cv_style_webpage_2.css
+    theme: default
 ---
-
 
 ```{r}
 #| label: required-packages
@@ -13,6 +13,8 @@ format:
 library(tidyverse)
 library(janitor)
 library(googlesheets4)
+library(quarto)
+library(renderthis)
 ```
 
 ```{r}
@@ -32,25 +34,137 @@ references <- read_sheet(cv_data, sheet = "References")
 ```
 
 ```{r}
-#| label: cv-header
+#| label: cv-personal-info
 #| echo: false
 #| results: asis
 
 # Extract personal information
-name <- paste(personal_info$First_Name_Short, personal_info$Last_Name, "-", personal_info$Degree)
+name <- paste(personal_info$First_Name_Short, personal_info$Last_Name, ",", personal_info$Degree)
+professional_title <- personal_info$Professional_Title
 email <- personal_info$Email
 phone <- personal_info$Cell_Phone
 website <- personal_info$Website
 linkedin <- personal_info$LinkedIn
 github <- personal_info$Github
 
-# Create header
-cat(name, "\n\n", sep = "")
-cat(email, " | ", phone, "\n\n", sep = "")
-
-# Add links with icons
-cat("[", website, "](https://", website, ")", " | ", 
-    "[{{< fa brands linkedin >}}](", linkedin, ")", " | ",
-    "[{{< fa brands github >}}](", github, ")",
-    "\n\n", sep = "")
+cat("::: {.personal_info}\n\n")
+cat("::: {.text-center}\n\n")
+cat("# ", name, "\n\n")
+cat("<div class=\"professional-title\">**", professional_title, "**</div>\n\n", sep = "")
+cat(":::\n\n")
+cat(":::\n\n")
 ```
+
+```{r}
+#| label: cv-layout
+#| echo: false
+#| results: asis
+
+# Start 2-column container
+cat(":::: {.columns style=\"column-gap: 1%;\"}\n\n")
+
+# Left column - Employment and Education (70%)
+cat("::: {.column width=\"70%\"}\n")
+```
+
+```{r}
+#| label: cv-employment
+#| echo: false
+#| results: asis
+
+cat("::: {.employment}\n\n")
+cat("## Employment\n\n")
+
+walk(1:5, \(i) {
+  emp <- employment |> slice(i)
+  
+  cat("**", emp$Employer, "**, ", emp$Position_Title, ": ",
+      emp$Month_Start, " ", emp$Year_Start, " - ",
+      ifelse(is.na(emp$Month_End), "Present", paste(emp$Month_End, emp$Year_End)),
+      "\n\n", sep = "")
+  
+  cat("::: {style=\"margin-top: -20px; margin-bottom: -30px;\"}\n")
+  cat(":::: {.callout-note appearance=\"minimal\" style=\"padding-top: 0px; padding-bottom: 0px; border-left-color: #723d42ff; border: 0.0px solid #723d42ff\"}\n")
+  cat("::: {style=\"margin-top: -5px; margin-bottom: -5px\"}\n")
+  
+  # Add bullets for all accomplishment columns
+  accomplishments <- emp |> select(starts_with("Accomplishments_")) |> 
+    unlist() |> 
+    na.omit()
+  
+  walk(accomplishments, \(acc) cat("- ", acc, "\n", sep = ""))
+  
+  cat(":::\n")
+  cat("::::\n:::\n\n")
+})
+
+cat(":::\n\n")
+```
+
+```{r}
+#| label: cv-education
+#| echo: false
+#| results: asis
+
+cat("::: {.education}\n\n")
+cat("## Education\n\n")
+
+walk(1:nrow(education), \(i) {
+  edu <- education |> slice(i)
+  cat("**", edu$Degree, "** - ", edu$Degree_specialization, ", ", edu$Institution, ", ", edu$Location, "\n\n", sep = "")
+})
+
+cat(":::\n\n")
+
+cat(":::\n\n")  # Close left column
+```
+
+```{r}
+#| label: cv-right-column
+#| echo: false
+#| results: asis
+
+# Right column - Contact, Skills, Professional Service (30%)
+cat("::: {.column width=\"30%\"}\n\n")
+
+# Contact Information
+cat("::: {.contact_info}\n\n")
+cat("## Contact\n\n")
+cat(email, "\n\n")
+cat("[", website, "](", website, ")\n\n", sep = "")
+cat("[{{< fa brands linkedin >}} LinkedIn](", linkedin, ")\n\n", sep = "")
+cat("[{{< fa brands github >}} GitHub](", github, ")\n\n", sep = "")
+cat(":::\n\n")
+
+# Skills
+cat("::: {.skills}\n\n")
+cat("## Skills\n\n")
+walk(1:nrow(skills), \(i) {
+  skill <- skills |> slice(i)
+  cat("- ", skill$Skill, "\n", sep = "")
+})
+cat(":::\n\n")
+
+# Professional Service
+cat("::: {.professional_service}\n\n")
+cat("## Professional Service\n\n")
+
+walk(1:nrow(professional_service), \(i) {
+  ps <- professional_service |> slice(i)
+  
+  year_range <- if(is.na(ps$Year_End) || is.list(ps$Year_End)) {
+    paste0(ps$Year_Start, " - Present")
+  } else {
+    paste0(ps$Year_Start, " - ", ps$Year_End)
+  }
+  
+  cat("**", ps$Professional_Service, "**, ", ps$Institution, ": ", year_range, "\n\n", sep = "")
+})
+
+cat(":::\n\n")
+
+cat(":::\n\n")  # Close right column
+
+cat("::::\n\n")  # Close columns container
+```
+

@@ -1,0 +1,106 @@
+/* CV Styling */
+
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Personal information section */
+.personal_info {
+    text-align: center;
+    padding: -10px 2px;
+    border-bottom: 2px solid #000;
+    margin-bottom: 20px;
+}
+
+/* Content wrapper for two-column layout */
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Skills section (left column) */
+.skills {
+    flex: 1;
+    background-color: #fff;
+    padding: 5px 15px 15px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Main content (right column) */
+.main-content {
+    flex: 3;
+}
+
+/* Employment section */
+.employment {
+    background-color: #fff;
+    padding: 5px 15px 15px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.employment h2 {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Education section */
+.education {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Certifications section */
+.certifications {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Professional service section */
+.professional_service {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styling */
+h1, h2, h3 {
+    color: #333;
+}
+
+h2 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+/* List styling */
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+

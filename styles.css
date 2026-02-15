@@ -1,0 +1,123 @@
+/* CV Styles - 3 Column Layout */
+
+/* Page margins */
+body {
+  margin-left: 2in;
+  margin-right: 2in;
+}
+
+/* Personal Information - Full width header */
+.personal-info {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Main container for 3-column layout */
+.cv-container {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Left column - Skills */
+.skills-section {
+  grid-column: 1;
+  border: 0.25px solid #69464662;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Middle column - Employment and Education */
+.employment-section,
+.education-section {
+  grid-column: 2;
+  border: 0.25px solid #69464662;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Right column - Professional Service and Certifications */
+.professional-service-section,
+.certifications-section {
+  grid-column: 3;
+  border: 0.25px solid #69464662;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Callout boxes within sections */
+.callout-note {
+  border-left: 3px solid #723d42ff;
+  padding-left: 10px;
+  margin-top: -10px;
+  margin-bottom: 5px;
+}
+
+/* Section headings */
+.skills-section h2,
+.employment-section h2,
+.education-section h2,
+.professional-service-section h2,
+.certifications-section h2 {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Bullet points styling */
+.skills-section ul,
+.employment-section ul,
+.professional-service-section ul {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+}
+
+.skills-section li,
+.employment-section li,
+.professional-service-section li {
+  margin-bottom: 5px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 1200px) {
+  .cv-container {
+    grid-template-columns: 30% 70%;
+    gap: 1rem;
+  }
+  
+  .skills-section {
+    grid-column: 1;
+  }
+  
+  .employment-section,
+  .education-section {
+    grid-column: 2;
+  }
+  
+  .professional-service-section,
+  .certifications-section {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .cv-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .skills-section,
+  .employment-section,
+  .education-section,
+  .professional-service-section,
+  .certifications-section {
+    grid-column: 1;
+  }
+}
