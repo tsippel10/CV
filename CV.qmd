@@ -4,6 +4,7 @@ format:
   html:
     css: cv_style_webpage_2.css
     theme: default
+#bibliography: Bibliography/My Library.bib
 ---
 
 ```{r}
@@ -87,12 +88,17 @@ walk(1:5, \(i) {
   cat(":::: {.callout-note appearance=\"minimal\" style=\"padding-top: 0px; padding-bottom: 0px; border-left-color: #723d42ff; border: 0.0px solid #723d42ff\"}\n")
   cat("::: {style=\"margin-top: -5px; margin-bottom: -5px\"}\n")
   
-  # Add bullets for all accomplishment columns
-  accomplishments <- emp |> select(starts_with("Accomplishments_")) |> 
-    unlist() |> 
-    na.omit()
-  
-  walk(accomplishments, \(acc) cat("- ", acc, "\n", sep = ""))
+  # Add the position description
+  if (!is.na(emp$Position_Description)) {
+    cat(emp$Position_Description, "\n\n", sep = "")
+  }
+
+  # Add one bullet point for the Accomplishments column (ignore Accomplishments_ columns)
+  if (!is.na(emp$Accomplishments)) {
+    cat("::: {style=\"margin-top: -0.8em; font-size: 90%;\"}\n")
+    cat("\\* ", emp$Accomplishments, "\n", sep = "")
+    cat(":::\n\n")
+  }
   
   cat(":::\n")
   cat("::::\n:::\n\n")
@@ -168,3 +174,4 @@ cat(":::\n\n")  # Close right column
 cat("::::\n\n")  # Close columns container
 ```
 
+## Publications

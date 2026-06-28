@@ -5,7 +5,9 @@
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
-]{article}
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
 \usepackage{xcolor}
 \usepackage{amsmath,amssymb}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
@@ -104,6 +106,7 @@
  
 
 
+\KOMAoption{captions}{tableheading}
 \makeatletter
 \@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
 \@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
@@ -181,21 +184,16 @@
 \begin{document}
 
 
-\section{Tim Sippel - Ph.D.~}\label{tim-sippel---ph.d.}
+\section{Tim Sippel , Ph.D.~}\label{tim-sippel-ph.d.}
 
-tsippel@gmail.com \textbar{} \url{www.marinescientist.earth}\\
-\href{https://www.linkedin.com/in/tim-sippel-704b5313}{\faIcon{linkedin}
-LinkedIn} \textbar{} \href{https://github.com/tsippel10}{\faIcon{github}
-GitHub}
+\textbf{Senior Marine and Aquatic Scientist}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\textbf{Employment (since PhD)}
+\subsection{Employment}\label{employment}
 
 \textbf{Stantec}, Senior Environmental Scientist (Fish Ecology SME): Jul
 2024 - Present
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, leftrule=.75mm, colback=white, bottomrule=.15mm, opacityback=0, left=2mm, arc=.35mm, colframe=quarto-callout-note-color-frame, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colframe=quarto-callout-note-color-frame, breakable, leftrule=.75mm, opacityback=0, colback=white, left=2mm, rightrule=.15mm, toprule=.15mm, bottomrule=.15mm]
 
 \begin{itemize}
 \tightlist
@@ -209,7 +207,7 @@ GitHub}
 \textbf{Worley Consulting}, Senior Environmental Scientist (Fish Ecology
 SME): Jun 2022 - Jun 2024
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, leftrule=.75mm, colback=white, bottomrule=.15mm, opacityback=0, left=2mm, arc=.35mm, colframe=quarto-callout-note-color-frame, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colframe=quarto-callout-note-color-frame, breakable, leftrule=.75mm, opacityback=0, colback=white, left=2mm, rightrule=.15mm, toprule=.15mm, bottomrule=.15mm]
 
 \begin{itemize}
 \tightlist
@@ -223,7 +221,7 @@ SME): Jun 2022 - Jun 2024
 \textbf{Washington Department of Fish and Wildlife}, Fishery Scientist:
 Aug 2017 - Aug 2022
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, leftrule=.75mm, colback=white, bottomrule=.15mm, opacityback=0, left=2mm, arc=.35mm, colframe=quarto-callout-note-color-frame, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colframe=quarto-callout-note-color-frame, breakable, leftrule=.75mm, opacityback=0, colback=white, left=2mm, rightrule=.15mm, toprule=.15mm, bottomrule=.15mm]
 
 \begin{itemize}
 \tightlist
@@ -236,16 +234,18 @@ Aug 2017 - Aug 2022
 
 \end{tcolorbox}
 
-\textbf{Ocean Associates}, Research Fishery Biologist: Sep 2011 - Jul
-2017
+\textbf{Ocean Associates (Contracted to NOAA)}, Research Biologist: Sep
+2011 - Jul 2017
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, leftrule=.75mm, colback=white, bottomrule=.15mm, opacityback=0, left=2mm, arc=.35mm, colframe=quarto-callout-note-color-frame, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colframe=quarto-callout-note-color-frame, breakable, leftrule=.75mm, opacityback=0, colback=white, left=2mm, rightrule=.15mm, toprule=.15mm, bottomrule=.15mm]
 
 \begin{itemize}
 \tightlist
 \item
   Contribted to international stock assessment of sharks and billfish in
   North Pacific Ocean
+\item
+  Advised the Pacific Fishery Management Council on fishery policy
 \end{itemize}
 
 \end{tcolorbox}
@@ -253,7 +253,7 @@ Aug 2017 - Aug 2022
 \textbf{University of Hawaii}, Post-doctoral Scientist: Mar 2010 - Aug
 2011
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, leftrule=.75mm, colback=white, bottomrule=.15mm, opacityback=0, left=2mm, arc=.35mm, colframe=quarto-callout-note-color-frame, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colframe=quarto-callout-note-color-frame, breakable, leftrule=.75mm, opacityback=0, colback=white, left=2mm, rightrule=.15mm, toprule=.15mm, bottomrule=.15mm]
 
 \begin{itemize}
 \tightlist
@@ -262,6 +262,53 @@ Aug 2017 - Aug 2022
 \end{itemize}
 
 \end{tcolorbox}
+
+\subsection{Education}\label{education}
+
+\textbf{Ph.D.} - Marine Ecology, University of Auckland, New Zealand
+
+\textbf{MSc.} - Marine Ecology, Massey University, New Zealand
+
+\textbf{B.S.} - Biology, Kansas State University, Manhattan, KS
+
+\subsection{Contact}\label{contact}
+
+tsippel@gmail.com
+
+\url{www.marinescientist.earth}
+
+\href{https://www.linkedin.com/in/tim-sippel-704b5313}{\faIcon{linkedin}
+LinkedIn}
+
+\href{https://github.com/tsippel10}{\faIcon{github} GitHub}
+
+\subsection{Skills}\label{skills}
+
+\begin{itemize}
+\tightlist
+\item
+  R programming
+\item
+  GIS
+\item
+  Quarto
+\end{itemize}
+
+\subsection{Professional Service}\label{professional-service}
+
+\textbf{Science Integration Team}, CVPIA: 2025 - Present
+
+\textbf{Standing Committee on Offshore Wind and Fisheries Member},
+National Academies of Science: 2025 - Present
+
+\textbf{Technical Advisory Committee Member}, US vs Oregon Policy
+Committee: 2017 - Present
+
+\textbf{Highly Migratory Species Management Team}, Pacific Fisheries
+Management Council: 2012 - Present
+
+\textbf{Stock Assessment Analyst}, International Scientific Committee
+for Tuna and Tuna-like Species: 2011 - Present
 
 
 
