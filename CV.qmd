@@ -4,8 +4,20 @@ format:
   html:
     css: cv_style_webpage_2.css
     theme: default
+    format-links: false
+  typst:
+    output-file: PDF
+    papersize: us-letter
+    fig-format: png
+    margin:
+      x: 1.5cm
+      y: 1.5cm
 #bibliography: Bibliography/My Library.bib
 ---
+
+```{=typst}
+#import "@preview/fontawesome:0.5.0": *
+```
 
 ```{r}
 #| label: required-packages
@@ -40,18 +52,22 @@ references <- read_sheet(cv_data, sheet = "References")
 #| results: asis
 
 # Extract personal information
-name <- paste(personal_info$First_Name_Short, personal_info$Last_Name, ",", personal_info$Degree)
+name <- paste0(personal_info$First_Name_Short, " ", personal_info$Last_Name, ", ", personal_info$Degree)
 professional_title <- personal_info$Professional_Title
 email <- personal_info$Email
 phone <- personal_info$Cell_Phone
 website <- personal_info$Website
 linkedin <- personal_info$LinkedIn
 github <- personal_info$Github
+professional_statement <- personal_info$Professional_Statement
 
 cat("::: {.personal_info}\n\n")
 cat("::: {.text-center}\n\n")
 cat("# ", name, "\n\n")
 cat("<div class=\"professional-title\">**", professional_title, "**</div>\n\n", sep = "")
+if (!is.na(professional_statement)) {
+  cat("::: {.professional-statement}\n", professional_statement, "\n:::\n\n", sep = "")
+}
 cat(":::\n\n")
 cat(":::\n\n")
 ```
@@ -61,11 +77,14 @@ cat(":::\n\n")
 #| echo: false
 #| results: asis
 
-# Start 2-column container
-cat(":::: {.columns style=\"column-gap: 1%;\"}\n\n")
-
-# Left column - Employment and Education (70%)
-cat("::: {.column width=\"70%\"}\n")
+# Start 2-column container. Typst uses a raw #grid; HTML uses Bootstrap columns.
+if (knitr::pandoc_to("typst")) {
+  cat("```{=typst}\n#grid(\n  columns: (0.7fr, 0.3fr),\n  column-gutter: 1.2em,\n  [\n```\n\n")
+} else {
+  cat(":::: {.columns style=\"column-gap: 1%;\"}\n\n")
+  # Left column - Employment and Education (70%)
+  cat("::: {.column width=\"70%\"}\n")
+}
 ```
 
 ```{r}
@@ -90,19 +109,37 @@ walk(1:5, \(i) {
   
   # Add the position description
   if (!is.na(emp$Position_Description)) {
-    cat(emp$Position_Description, "\n\n", sep = "")
+    cat("**Position:** ", emp$Position_Description, "\n\n", sep = "")
   }
 
-  # Add one bullet point for the Accomplishments column (ignore Accomplishments_ columns)
+  # Add the Accomplishments column (ignore Accomplishments_ columns)
   if (!is.na(emp$Accomplishments)) {
     cat("::: {style=\"margin-top: -0.8em; font-size: 90%;\"}\n")
-    cat("\\* ", emp$Accomplishments, "\n", sep = "")
+    cat("**Accomplishments:** ", emp$Accomplishments, "\n", sep = "")
     cat(":::\n\n")
   }
   
   cat(":::\n")
   cat("::::\n:::\n\n")
 })
+
+cat(":::\n\n")
+```
+
+```{r}
+#| label: cv-projects
+#| echo: false
+#| results: asis
+
+cat("::: {.project_experience}\n\n")
+cat("## Project Experience\n\n")
+
+# List each project type from the Projects sheet, separated by semicolons
+project_types <- projects$Project_Type |>
+  na.omit() |>
+  unique()
+
+cat(paste(project_types, collapse = "; "), "\n\n")
 
 cat(":::\n\n")
 ```
@@ -122,7 +159,10 @@ walk(1:nrow(education), \(i) {
 
 cat(":::\n\n")
 
-cat(":::\n\n")  # Close left column
+# Close left column (HTML only; Typst left cell is closed in the next chunk)
+if (!knitr::pandoc_to("typst")) {
+  cat(":::\n\n")
+}
 ```
 
 ```{r}
@@ -131,15 +171,27 @@ cat(":::\n\n")  # Close left column
 #| results: asis
 
 # Right column - Contact, Skills, Professional Service (30%)
-cat("::: {.column width=\"30%\"}\n\n")
+if (knitr::pandoc_to("typst")) {
+  cat("```{=typst}\n  ],\n  [\n```\n\n")  # close left cell, open right cell
+} else {
+  cat("::: {.column width=\"30%\"}\n\n")
+}
 
 # Contact Information
 cat("::: {.contact_info}\n\n")
 cat("## Contact\n\n")
 cat(email, "\n\n")
 cat("[", website, "](", website, ")\n\n", sep = "")
-cat("[{{< fa brands linkedin >}} LinkedIn](", linkedin, ")\n\n", sep = "")
-cat("[{{< fa brands github >}} GitHub](", github, ")\n\n", sep = "")
+if (knitr::pandoc_to("typst")) {
+  # Typst icons via the @preview/fontawesome package
+  cat("```{=typst}\n#link(\"", linkedin, "\")[#fa-linkedin() LinkedIn]\n```\n\n", sep = "")
+  cat("```{=typst}\n#link(\"", github, "\")[#fa-github() GitHub]\n```\n\n", sep = "")
+} else {
+  cat("[{{< fa brands linkedin >}} LinkedIn](", linkedin, ")\n\n", sep = "")
+  cat("[{{< fa brands github >}} GitHub](", github, ")\n\n", sep = "")
+  # Real download link (HTML only): the download attribute forces a save
+  cat("[{{< fa solid file-pdf >}} Download PDF](PDF.pdf){download=\"CV.pdf\"}\n\n")
+}
 cat(":::\n\n")
 
 # Skills
@@ -158,10 +210,14 @@ cat("## Professional Service\n\n")
 walk(1:nrow(professional_service), \(i) {
   ps <- professional_service |> slice(i)
   
-  year_range <- if(is.na(ps$Year_End) || is.list(ps$Year_End)) {
-    paste0(ps$Year_Start, " - Present")
+  # Year_End is a list-column (mixed numbers and text), so pull out the scalar
+  year_end <- ps$Year_End
+  if (is.list(year_end)) year_end <- year_end[[1]]
+
+  year_range <- if(length(year_end) == 0 || is.na(year_end)) {
+    as.character(ps$Year_Start)
   } else {
-    paste0(ps$Year_Start, " - ", ps$Year_End)
+    paste0(ps$Year_Start, " - ", year_end)
   }
   
   cat("**", ps$Professional_Service, "**, ", ps$Institution, ": ", year_range, "\n\n", sep = "")
@@ -169,9 +225,16 @@ walk(1:nrow(professional_service), \(i) {
 
 cat(":::\n\n")
 
-cat(":::\n\n")  # Close right column
+# Close right column / grid container
+if (knitr::pandoc_to("typst")) {
+  cat("```{=typst}\n  ]\n)\n```\n\n")  # close right cell + grid
+} else {
+  cat(":::\n\n")  # Close right column
+}
 
-cat("::::\n\n")  # Close columns container
+if (!knitr::pandoc_to("typst")) {
+  cat("::::\n\n")  # Close columns container (HTML only)
+}
 ```
 
 ## Publications

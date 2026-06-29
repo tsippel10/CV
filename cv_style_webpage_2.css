@@ -27,9 +27,19 @@ body {
     color: #555;
 }
 
+/* Professional statement styling */
+.professional-statement {
+    font-size: 1em;
+    max-width: 60em;
+    margin: 0 auto 10px auto;
+    color: #444;
+    font-style: italic;
+}
+
 /* Shared div styling */
 .employment,
 .education,
+.project_experience,
 .contact_info,
 .skills,
 .professional_service,
@@ -45,6 +55,7 @@ body {
 /* Shared h2 styling for all sections */
 .employment h2,
 .education h2,
+.project_experience h2,
 .contact_info h2,
 .skills h2,
 .professional_service h2,
