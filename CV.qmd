@@ -163,13 +163,11 @@ cat(email, "\n\n")
 cat("[", website, "](", website, ")\n\n", sep = "")
 cat("[{{< fa brands linkedin >}} LinkedIn](", linkedin, ")\n\n", sep = "")
 cat("[{{< fa brands github >}} GitHub](", github, ")\n\n", sep = "")
-# Real download link: the download attribute forces a save
-cat("[{{< fa solid file-pdf >}} Download PDF](PDF.pdf){download=\"CV.pdf\"}\n\n")
 cat(":::\n\n")
 
 # Skills
 cat("::: {.skills}\n\n")
-cat("## Skills\n\n")
+cat("## Technical Skills\n\n")
 walk(1:nrow(skills), \(i) {
   skill <- skills |> slice(i)
   cat("- ", skill$Skill, "\n", sep = "")
