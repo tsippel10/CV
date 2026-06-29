@@ -1,0 +1,6 @@
+project:
+  type: default
+  render:
+    - CV.qmd
+  post-render:
+    - make_pdf.R

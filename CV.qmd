@@ -5,19 +5,8 @@ format:
     css: cv_style_webpage_2.css
     theme: default
     format-links: false
-  typst:
-    output-file: PDF
-    papersize: us-letter
-    fig-format: png
-    margin:
-      x: 1.5cm
-      y: 1.5cm
 #bibliography: Bibliography/My Library.bib
 ---
-
-```{=typst}
-#import "@preview/fontawesome:0.5.0": *
-```
 
 ```{r}
 #| label: required-packages
@@ -77,14 +66,11 @@ cat(":::\n\n")
 #| echo: false
 #| results: asis
 
-# Start 2-column container. Typst uses a raw #grid; HTML uses Bootstrap columns.
-if (knitr::pandoc_to("typst")) {
-  cat("```{=typst}\n#grid(\n  columns: (0.7fr, 0.3fr),\n  column-gutter: 1.2em,\n  [\n```\n\n")
-} else {
-  cat(":::: {.columns style=\"column-gap: 1%;\"}\n\n")
-  # Left column - Employment and Education (70%)
-  cat("::: {.column width=\"70%\"}\n")
-}
+# Start 2-column container
+cat(":::: {.columns style=\"column-gap: 1%;\"}\n\n")
+
+# Left column - Employment and Education (70%)
+cat("::: {.column width=\"70%\"}\n")
 ```
 
 ```{r}
@@ -159,10 +145,7 @@ walk(1:nrow(education), \(i) {
 
 cat(":::\n\n")
 
-# Close left column (HTML only; Typst left cell is closed in the next chunk)
-if (!knitr::pandoc_to("typst")) {
-  cat(":::\n\n")
-}
+cat(":::\n\n")  # Close left column
 ```
 
 ```{r}
@@ -171,27 +154,17 @@ if (!knitr::pandoc_to("typst")) {
 #| results: asis
 
 # Right column - Contact, Skills, Professional Service (30%)
-if (knitr::pandoc_to("typst")) {
-  cat("```{=typst}\n  ],\n  [\n```\n\n")  # close left cell, open right cell
-} else {
-  cat("::: {.column width=\"30%\"}\n\n")
-}
+cat("::: {.column width=\"30%\"}\n\n")
 
 # Contact Information
 cat("::: {.contact_info}\n\n")
 cat("## Contact\n\n")
 cat(email, "\n\n")
 cat("[", website, "](", website, ")\n\n", sep = "")
-if (knitr::pandoc_to("typst")) {
-  # Typst icons via the @preview/fontawesome package
-  cat("```{=typst}\n#link(\"", linkedin, "\")[#fa-linkedin() LinkedIn]\n```\n\n", sep = "")
-  cat("```{=typst}\n#link(\"", github, "\")[#fa-github() GitHub]\n```\n\n", sep = "")
-} else {
-  cat("[{{< fa brands linkedin >}} LinkedIn](", linkedin, ")\n\n", sep = "")
-  cat("[{{< fa brands github >}} GitHub](", github, ")\n\n", sep = "")
-  # Real download link (HTML only): the download attribute forces a save
-  cat("[{{< fa solid file-pdf >}} Download PDF](PDF.pdf){download=\"CV.pdf\"}\n\n")
-}
+cat("[{{< fa brands linkedin >}} LinkedIn](", linkedin, ")\n\n", sep = "")
+cat("[{{< fa brands github >}} GitHub](", github, ")\n\n", sep = "")
+# Real download link: the download attribute forces a save
+cat("[{{< fa solid file-pdf >}} Download PDF](PDF.pdf){download=\"CV.pdf\"}\n\n")
 cat(":::\n\n")
 
 # Skills
@@ -225,16 +198,8 @@ walk(1:nrow(professional_service), \(i) {
 
 cat(":::\n\n")
 
-# Close right column / grid container
-if (knitr::pandoc_to("typst")) {
-  cat("```{=typst}\n  ]\n)\n```\n\n")  # close right cell + grid
-} else {
-  cat(":::\n\n")  # Close right column
-}
-
-if (!knitr::pandoc_to("typst")) {
-  cat("::::\n\n")  # Close columns container (HTML only)
-}
+cat(":::\n\n")   # Close right column
+cat("::::\n\n")  # Close columns container
 ```
 
 ## Publications
