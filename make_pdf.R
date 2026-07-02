@@ -1,5 +1,5 @@
 # Quarto post-render hook: print the rendered HTML to PDF with headless Chrome
-# so PDF.pdf is visually identical to CV.html (same CSS, cards, colors, layout).
+# so CV_Sippel.pdf is visually identical to CV.html (same CSS, cards, colors, layout).
 pagedown::chrome_print(
   input = "CV.html",
   output = "CV_Sippel.pdf",
