@@ -5,3 +5,47 @@
 
 /.quarto/
 **/*.quarto_ipynb
+
+# macOS / logs / scratch
+.DS_Store
+*.log
+Untitled-*.qmd
+Untitled-*.html
+Untitled-*_files/
+
+# Large unused full Zotero export (CV uses Bibliography/cv_publications.bib)
+Bibliography/My Library.bib
+
+# Local tooling / AI assistant working directories
+skills/
+skills-lock.json
+.adal/
+.agents/
+.augment/
+.bob/
+.claude/
+.codebuddy/
+.commandcode/
+.continue/
+.cortex/
+.crush/
+.factory/
+.goose/
+.iflow/
+.junie/
+.kilocode/
+.kiro/
+.kode/
+.mcpjam/
+.mux/
+.neovate/
+.openhands/
+.pi/
+.pochi/
+.qoder/
+.qwen/
+.roo/
+.trae/
+.vibe/
+.windsurf/
+.zencoder/
